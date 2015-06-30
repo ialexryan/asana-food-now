@@ -13,11 +13,10 @@ function deactivateSpinner() {
     spinner.stop();
 }
 function isFriday() {
-    var day = (new Date()).getDay();
-    return (day == 5);
+    return (moment().day() == 5);
 }
 function isWeekend() {
-    var day = (new Date()).getDay();
+    var day = moment().day();
     return ((day == 6) || (day == 0));
 }
 var Meal;
@@ -29,51 +28,45 @@ var Meal;
 })(Meal || (Meal = {}));
 ;
 function calculateCurrentMealInfo() {
-    var now = new Date();
-    var breakfastStart = new Date();
-    var breakfastEnd = new Date();
-    var lunchStart = new Date();
-    var lunchEnd = new Date();
-    var dinnerStart = new Date();
-    var dinnerEnd = new Date();
-    breakfastStart.setHours(9, 0);
-    breakfastEnd.setHours(10, 0);
-    lunchStart.setHours(12, 30);
-    lunchEnd.setHours(13, 30);
-    dinnerStart.setHours(18, 30);
-    dinnerEnd.setHours(19, 15);
+    var now = moment();
+    var breakfastStart = moment("9:00", "h:mm");
+    var breakfastEnd = moment("10:00", "h:mm");
+    var lunchStart = moment("12:30", "h:mm");
+    var lunchEnd = moment("13:30", "h:mm");
+    var dinnerStart = moment("18:30", "h:mm");
+    var dinnerEnd = moment("19:15", "h:mm");
     if (isWeekend()) {
         return { meal: Meal.None,
             time: now,
             isNow: false };
     }
-    if (now < breakfastStart) {
+    if (now.isBefore(breakfastStart)) {
         return { meal: Meal.Breakfast,
             time: breakfastStart,
             isNow: false };
     }
-    if ((now > breakfastStart) && (now < breakfastEnd)) {
+    if (now.isBetween(breakfastStart, breakfastEnd)) {
         return { meal: Meal.Breakfast,
             time: breakfastEnd,
             isNow: true };
     }
-    if ((now > breakfastEnd) && (now < lunchStart)) {
+    if (now.isBetween(breakfastEnd, lunchStart)) {
         return { meal: Meal.Lunch,
             time: lunchStart,
             isNow: false };
     }
-    if ((now > lunchStart) && (now < lunchEnd)) {
+    if (now.isBetween(lunchStart, lunchEnd)) {
         return { meal: Meal.Lunch,
             time: lunchEnd,
             isNow: true };
     }
     if (!isFriday()) {
-        if ((now > lunchEnd) && (now < dinnerStart)) {
+        if (now.isBetween(lunchEnd, dinnerStart)) {
             return { meal: Meal.Dinner,
                 time: dinnerStart,
                 isNow: false };
         }
-        if ((now > dinnerStart) && (now < dinnerEnd)) {
+        if (now.isBetween(dinnerStart, dinnerEnd)) {
             return { meal: Meal.Dinner,
                 time: dinnerEnd,
                 isNow: true };
@@ -99,7 +92,7 @@ function drawWhichMeal() {
         pre = "Next up: ";
         post = " at ";
     }
-    post += moment(time).format("h:mm") + ".";
+    post += time.format("h:mm") + ".";
     switch (meal) {
         case Meal.Breakfast:
             body = "breakfast";
@@ -114,11 +107,12 @@ function drawWhichMeal() {
             document.getElementById("dinnerTimes").style.color = "green";
             break;
     }
+    var output = "";
     if (meal == Meal.None) {
-        var output = "Go out to eat!";
+        output = "Go out to eat!";
     }
     else {
-        var output = pre + body + post;
+        output = pre + body + post;
     }
     document.getElementById("currentMeal").innerHTML = output;
 }

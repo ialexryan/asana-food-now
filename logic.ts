@@ -18,12 +18,11 @@ function deactivateSpinner(): void {
 }
 
 function isFriday(): boolean {
-    var day: number = (new Date()).getDay();
-    return (day == 5);
+    return (moment().day() == 5);
 }
 
 function isWeekend(): boolean {
-    var day: number = (new Date()).getDay();
+    var day: number = moment().day();
     return ((day == 6) || (day == 0));
 }
 
@@ -32,59 +31,52 @@ enum Meal {Breakfast, Lunch, Dinner, None};
 // This function returns the next meal, whether it is currently happening,
 // and its start or end time, as appropriate.
 function calculateCurrentMealInfo(): {meal: Meal,
-                                      time: Date,
+                                      time: Moment,
                                       isNow: boolean} {
-    var now = new Date();
+    var now = moment();
 
-    var breakfastStart: Date = new Date();
-    var breakfastEnd: Date = new Date();
-    var lunchStart: Date = new Date();
-    var lunchEnd: Date = new Date();
-    var dinnerStart: Date = new Date();
-    var dinnerEnd: Date = new Date();
+    var breakfastStart = moment("9:00", "h:mm");
+    var breakfastEnd = moment("10:00", "h:mm");
 
-    breakfastStart.setHours(9, 0);
-    breakfastEnd.setHours(10, 0);
+    var lunchStart = moment("12:30", "h:mm");
+    var lunchEnd = moment("13:30", "h:mm");
 
-    lunchStart.setHours(12, 30);
-    lunchEnd.setHours(13, 30);
-
-    dinnerStart.setHours(18, 30);
-    dinnerEnd.setHours(19, 15);
+    var dinnerStart = moment("18:30", "h:mm");
+    var dinnerEnd = moment("19:15", "h:mm");
 
     if (isWeekend()) {
         return {meal: Meal.None,
                 time: now,
                 isNow: false};
     }
-    if (now < breakfastStart) {
+    if (now.isBefore(breakfastStart)) {
         return {meal: Meal.Breakfast,
                 time: breakfastStart,
                 isNow: false};
     }
-    if ((now > breakfastStart) && (now < breakfastEnd)) {
+    if (now.isBetween(breakfastStart, breakfastEnd)) {
         return {meal: Meal.Breakfast,
                 time: breakfastEnd,
                 isNow: true};
     }
-    if ((now > breakfastEnd) && (now < lunchStart)) {
+    if (now.isBetween(breakfastEnd, lunchStart)) {
         return {meal: Meal.Lunch,
                 time: lunchStart,
                 isNow: false};
     }
-    if ((now > lunchStart) && (now < lunchEnd)) {
+    if (now.isBetween(lunchStart, lunchEnd)) {
         return {meal: Meal.Lunch,
                 time: lunchEnd,
                 isNow: true};
     }
     // Dinner isn't served on Fridays
     if (!isFriday()) {
-        if ((now > lunchEnd) && (now < dinnerStart)) {
+        if (now.isBetween(lunchEnd, dinnerStart)) {
             return {meal: Meal.Dinner,
                     time: dinnerStart,
                     isNow: false};
         }
-        if ((now > dinnerStart) && (now < dinnerEnd)) {
+        if (now.isBetween(dinnerStart, dinnerEnd)) {
             return {meal: Meal.Dinner,
                     time: dinnerEnd,
                     isNow: true};
@@ -99,7 +91,7 @@ function calculateCurrentMealInfo(): {meal: Meal,
 function drawWhichMeal(): void {
     var currentMealInfo = calculateCurrentMealInfo();
     var meal: Meal = currentMealInfo.meal;
-    var time: Date = currentMealInfo.time;
+    var time: Moment = currentMealInfo.time;
     var isNow: boolean = currentMealInfo.isNow;
     var pre: string = "";
     var body: string = "";
@@ -112,7 +104,7 @@ function drawWhichMeal(): void {
         pre = "Next up: ";
         post = " at ";
     }
-    post += moment(time).format("h:mm") + ".";
+    post += time.format("h:mm") + ".";
 
     switch(meal) {
         case Meal.Breakfast:
@@ -129,10 +121,12 @@ function drawWhichMeal(): void {
             break;
     }
 
+
+    var output = "";
     if (meal == Meal.None) {
-        var output = "Go out to eat!";
+        output = "Go out to eat!";
     } else {
-        var output = pre + body + post;
+        output = pre + body + post;
     }
 
     document.getElementById("currentMeal").innerHTML = output;
