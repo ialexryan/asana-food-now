@@ -16,6 +16,7 @@
     ],
     "files": [
         "./logic.ts",
+        "./moment.d.ts",
         "./spin.d.ts"
     ]
 }

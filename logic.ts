@@ -3,6 +3,7 @@
 // from much prettier TypeScript. TS is awesome!)
 
 /// <reference path="spin.d.ts" />
+/// <reference path="moment.d.ts" />
 
 var spinner = new Spinner();
 
@@ -111,7 +112,7 @@ function drawWhichMeal(): void {
         pre = "Next up: ";
         post = " at ";
     }
-    post += time.toLocaleTimeString().slice(0, -6) + ".";
+    post += moment(time).format("h:mm") + ".";
 
     switch(meal) {
         case Meal.Breakfast:
