@@ -203,10 +203,4 @@ function addRow(key: string, value: string, tableName: string): void {
 window.onload = function() {
     getDataThenDrawMenu();
     drawWhichMeal();
-
-    // Populate the Current Time field
-    redrawCurrentTime();
-
-    // Populate the list of places
-    redrawPlaces();
 }

@@ -175,6 +175,4 @@ function addRow(key, value, tableName) {
 window.onload = function () {
     getDataThenDrawMenu();
     drawWhichMeal();
-    redrawCurrentTime();
-    redrawPlaces();
 };
