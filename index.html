@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>What's cookin?</title>
+    <meta name="description"   content="Find out which Caltech locations are open now!">
+    <meta property="og:url"    content="http://whatsopen.caltech.edu" />
+    <meta property="og:title"  content="What's open at Caltech?" />
+    <meta property="og:description" content="Find out which Caltech locations are open now!" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <link href="style.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="spin.min.js"></script>
+    <script type="text/javascript" src="logic.js"></script>
+
+
+
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <h3 id="currentMeal"></h3>
+            <div id="topright">
+                <table id="times">
+                    <tr id="breakfastTimes"><td>Breakfast: 9:00-10:00</td></tr>
+                    <tr id="lunchTimes"><td>Lunch: 12:30-1:30</td></tr>
+                    <tr id="dinnerTimes"><td>Dinner: 6:30-7:15</td></tr>
+                </table>
+            </div>
+            <hr>
+        </div>
+        <div id="content">
+            <h3>Menu:</h3>
+            <table id="menuItems"></table>
+            <hr>
+            <h3>Closed now, next open at:</h3>
+            <table id="closedPlaces"></table>
+            <div id="footer">
+                <hr>
+                <p>Created by <a id="melink" href="http://www.alexryan.org/" target="_blank">Alex Ryan</a>. Last updated June 2015.</p>
+                <p><a href="mailto:alex@alexryan.org?Subject=[whatsopen]" target="_top">Email me with corrections</a> and <a id="githublink" href="https://github.com/ialexryan/asana-food-now" target="_blank">check out the source code on Github!</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

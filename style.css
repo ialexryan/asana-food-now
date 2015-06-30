@@ -1,0 +1,47 @@
+.open {
+    color: green;
+}
+
+.closed {
+    color: red;
+}
+
+html,
+body {
+	height:100%;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+td {
+    padding-bottom: 8px;
+    padding-right: 4px;
+}
+
+
+#container {
+	min-height:100%;
+    padding-top:0;
+	position:relative;
+}
+#topright {
+    float: right;
+}
+#header {
+	background:red;
+    background-color:white;
+    width:100%;
+    height:200px;
+    padding-top:0px;
+    position:fixed;
+}
+#content {
+    padding-top:190px;
+	padding-bottom:100px; /* Height of the footer element */
+}
+#footer {
+	width:100%;
+	height:100px;
+	position:absolute;
+	bottom:0;
+	left:0;
