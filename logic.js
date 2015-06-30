@@ -36,11 +36,11 @@ function calculateCurrentMealInfo() {
     var dinnerStart = new Date();
     var dinnerEnd = new Date();
     breakfastStart.setHours(9, 0);
-    breakfastEnd.setHours(9, 10);
-    lunchStart.setHours(9, 14);
-    lunchEnd.setHours(9, 20);
-    dinnerStart.setHours(9, 25);
-    dinnerEnd.setHours(23, 15);
+    breakfastEnd.setHours(10, 0);
+    lunchStart.setHours(12, 30);
+    lunchEnd.setHours(13, 30);
+    dinnerStart.setHours(18, 30);
+    dinnerEnd.setHours(19, 15);
     if (isWeekend()) {
         return { meal: Meal.None,
             time: now,
