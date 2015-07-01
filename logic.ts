@@ -89,7 +89,7 @@ function calculateCurrentMealInfo(): {meal: Meal,
 
 
 function drawWhichMeal(): void {
-    document.getElementById("currentTime").innerHTML = moment().format("h:mm");
+    document.getElementById("currentTime").innerHTML = moment().format("h:mm a");
 
     var currentMealInfo = calculateCurrentMealInfo();
     var meal: Meal = currentMealInfo.meal;
@@ -113,12 +113,20 @@ function drawWhichMeal(): void {
             break;
     }
 
-    var output = (meal == Meal.None) ? "Go out to eat!" : (body + post);
+    if (meal == Meal.None) {
+      var output = "Go out to eat!"
+      var menuHeader: HTMLElement = document.getElementById("menuHeader");
+      menuHeader.parentNode.removeChild(menuHeader);
+    } else {
+      var output = body + post;
+    }
+
     document.getElementById("currentMeal").innerHTML = output;
 }
 
 
 function getDataThenDrawMenu(): void {
+    if (calculateCurrentMealInfo().meal == Meal.None) return;
     var xmlhttp = new XMLHttpRequest();
     var url = "https://script.googleusercontent.com/macros/echo?user_content_key=Iku4CGe5_WThh3oF_DFezWYZqBYYyMa2X-_k0aBu1ezY5Zqn8FkeBsLLnZ_RAEcjp15gwNXhr4CrAYSND1cR1Z-1eM6AxOKTm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnIbU15bzVjjRaqbric4FZjE7WJ5W35p2GFD85ZmQw1fkdMJBJiowdatKu-hQNta20TOmbnRGq-tk&lib=MzeUlzvZKqWHbDHnqVaX7dqRxvVkFdhbQ";
 
@@ -185,8 +193,8 @@ window.onload = function() {
         var menuHeader: HTMLElement = document.getElementById("menuHeader");
         menuHeader.parentNode.removeChild(menuHeader);
     } else {
-        var menuHeader: HTMLElement = document.getElementById("safariWarning");
-        menuHeader.parentNode.removeChild(menuHeader);
+        var safariWarning: HTMLElement = document.getElementById("safariWarning");
+        safariWarning.parentNode.removeChild(safariWarning);
         getDataThenDrawMenu();
     }
     drawWhichMeal();
