@@ -114,6 +114,8 @@ function getDataThenDrawMenu() {
     var xmlhttp = new XMLHttpRequest();
     var url = "https://script.googleusercontent.com/macros/echo?user_content_key=Iku4CGe5_WThh3oF_DFezWYZqBYYyMa2X-_k0aBu1ezY5Zqn8FkeBsLLnZ_RAEcjp15gwNXhr4CrAYSND1cR1Z-1eM6AxOKTm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnIbU15bzVjjRaqbric4FZjE7WJ5W35p2GFD85ZmQw1fkdMJBJiowdatKu-hQNta20TOmbnRGq-tk&lib=MzeUlzvZKqWHbDHnqVaX7dqRxvVkFdhbQ";
     xmlhttp.onreadystatechange = function () {
+        console.log(xmlhttp.status);
+        console.log(xmlhttp.readyState);
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             deactivateSpinner();
             drawMenu(JSON.parse(xmlhttp.responseText));
@@ -162,7 +164,7 @@ function addRow(key, value, tableName) {
     document.getElementById(tableName).appendChild(rowelem);
 }
 window.onload = function () {
-    if (bowser.safari || bowser.ios) {
+    if (false) {
         var menuHeader = document.getElementById("menuHeader");
         menuHeader.parentNode.removeChild(menuHeader);
     }
