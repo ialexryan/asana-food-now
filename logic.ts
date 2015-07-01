@@ -196,6 +196,13 @@ function addRow(key: string, value: string, tableName: string): void {
 /* This is the "main" function of sorts, it gets called when the page loads.
    It sets the places list and time to refresh every 5 seconds. */
 window.onload = function() {
-    getDataThenDrawMenu();
+    if (bowser.safari) {
+        var menuHeader: HTMLElement = document.getElementById("menuHeader");
+        menuHeader.parentNode.removeChild(menuHeader);
+    } else {
+        var menuHeader: HTMLElement = document.getElementById("safariWarning");
+        menuHeader.parentNode.removeChild(menuHeader);
+        getDataThenDrawMenu();
+    }
     drawWhichMeal();
 }

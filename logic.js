@@ -168,6 +168,14 @@ function addRow(key, value, tableName) {
     document.getElementById(tableName).appendChild(rowelem);
 }
 window.onload = function () {
-    getDataThenDrawMenu();
+    if (bowser.safari) {
+        var menuHeader = document.getElementById("menuHeader");
+        menuHeader.parentNode.removeChild(menuHeader);
+    }
+    else {
+        var menuHeader = document.getElementById("safariWarning");
+        menuHeader.parentNode.removeChild(menuHeader);
+        getDataThenDrawMenu();
+    }
     drawWhichMeal();
 };

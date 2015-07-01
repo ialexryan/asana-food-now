@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <link href="style.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="3rdparty/bowser.min.js"></script>
     <script type="text/javascript" src="3rdparty/spin.min.js"></script>
     <script type="text/javascript" src="3rdparty/moment.min.js"></script>
     <script type="text/javascript" src="logic.js"></script>
@@ -27,8 +28,11 @@
             </div>
         </div>
         <div id="content">
-            <h3>Menu:</h3>
-            <table id="menuItems"></table>
+            <div id="menu">
+                <p id="safariWarning">Looks like you're trying to use Safari. Unfortunately, <a href="https://github.com/ialexryan/asana-food-now/issues/2">Safari and Google suck.</a></p>
+                <h3 id="menuHeader">Menu:</h3>
+                <table id="menuItems"></table>
+            </div>
             <div id="footer">
                 <hr>
                 <p>Created by <a id="melink" href="http://www.alexryan.org/" target="_blank">Alex Ryan</a>. Last updated June 2015.</p>
