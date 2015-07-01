@@ -77,43 +77,28 @@ function calculateCurrentMealInfo() {
         isNow: false };
 }
 function drawWhichMeal() {
+    document.getElementById("currentTime").innerHTML = moment().format("h:mm");
     var currentMealInfo = calculateCurrentMealInfo();
     var meal = currentMealInfo.meal;
     var time = currentMealInfo.time;
     var isNow = currentMealInfo.isNow;
-    var pre = "";
     var body = "";
-    var post = "";
-    if (isNow) {
-        pre = "Currently serving ";
-        post = " until ";
-    }
-    else {
-        pre = "Next up: ";
-        post = " at ";
-    }
-    post += time.format("h:mm") + ".";
+    var post = (isNow ? " ends " : " starts ") + time.fromNow() + ".";
     switch (meal) {
         case Meal.Breakfast:
-            body = "breakfast";
-            document.getElementById("breakfastTimes").style.color = "green";
+            body = "Breakfast";
+            document.getElementById("breakfastTimes").className = "current";
             break;
         case Meal.Lunch:
-            body = "lunch";
-            document.getElementById("lunchTimes").style.color = "green";
+            body = "Lunch";
+            document.getElementById("lunchTimes").className = "current";
             break;
         case Meal.Dinner:
-            body = "dinner";
-            document.getElementById("dinnerTimes").style.color = "green";
+            body = "Dinner";
+            document.getElementById("dinnerTimes").className = "current";
             break;
     }
-    var output = "";
-    if (meal == Meal.None) {
-        output = "Go out to eat!";
-    }
-    else {
-        output = pre + body + post;
-    }
+    var output = (meal == Meal.None) ? "Go out to eat!" : (body + post);
     document.getElementById("currentMeal").innerHTML = output;
 }
 function getDataThenDrawMenu() {

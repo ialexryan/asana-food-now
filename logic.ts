@@ -89,46 +89,31 @@ function calculateCurrentMealInfo(): {meal: Meal,
 
 
 function drawWhichMeal(): void {
+    document.getElementById("currentTime").innerHTML = moment().format("h:mm");
+
     var currentMealInfo = calculateCurrentMealInfo();
     var meal: Meal = currentMealInfo.meal;
     var time: Moment = currentMealInfo.time;
     var isNow: boolean = currentMealInfo.isNow;
-    var pre: string = "";
     var body: string = "";
-    var post: string = "";
-
-    if (isNow) {
-        pre = "Currently serving ";
-        post = " until ";
-    } else {
-        pre = "Next up: ";
-        post = " at ";
-    }
-    post += time.format("h:mm") + ".";
+    var post: string = (isNow ? " ends " : " starts ") + time.fromNow() + ".";
 
     switch(meal) {
         case Meal.Breakfast:
-            body = "breakfast";
-            document.getElementById("breakfastTimes").style.color = "green";
+            body = "Breakfast";
+            document.getElementById("breakfastTimes").className = "current";
             break;
         case Meal.Lunch:
-            body = "lunch";
-            document.getElementById("lunchTimes").style.color = "green";
+            body = "Lunch";
+            document.getElementById("lunchTimes").className = "current";
             break;
         case Meal.Dinner:
-            body = "dinner";
-            document.getElementById("dinnerTimes").style.color = "green";
+            body = "Dinner";
+            document.getElementById("dinnerTimes").className = "current";
             break;
     }
 
-
-    var output = "";
-    if (meal == Meal.None) {
-        output = "Go out to eat!";
-    } else {
-        output = pre + body + post;
-    }
-
+    var output = (meal == Meal.None) ? "Go out to eat!" : (body + post);
     document.getElementById("currentMeal").innerHTML = output;
 }
 
