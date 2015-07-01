@@ -15,8 +15,8 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
-        "./logic.ts",
-        "./moment.d.ts",
-        "./spin.d.ts"
+        "./3rdparty_definitions/moment.d.ts",
+        "./3rdparty_definitions/spin.d.ts",
+        "./logic.ts"
     ]
 }

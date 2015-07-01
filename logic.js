@@ -1,8 +1,8 @@
 // Copyright 2015 Alex Ryan
 // (Don't judge how awful this JavaScript looks, it was compiled
 // from much prettier TypeScript. TS is awesome!)
-/// <reference path="spin.d.ts" />
-/// <reference path="moment.d.ts" />
+/// <reference path="3rdparty_definitions/spin.d.ts" />
+/// <reference path="3rdparty_definitions/moment.d.ts" />
 var spinner = new Spinner();
 function activateSpinner() {
     var target = document.getElementById("content");
