@@ -162,7 +162,7 @@ function addRow(key, value, tableName) {
     document.getElementById(tableName).appendChild(rowelem);
 }
 window.onload = function () {
-    if (bowser.safari) {
+    if (bowser.safari || bowser.ios) {
         var menuHeader = document.getElementById("menuHeader");
         menuHeader.parentNode.removeChild(menuHeader);
     }

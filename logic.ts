@@ -189,7 +189,7 @@ function addRow(key: string, value: string, tableName: string): void {
 /* This is the "main" function of sorts, it gets called when the page loads.
    It sets the places list and time to refresh every 5 seconds. */
 window.onload = function() {
-    if (bowser.safari) {
+    if (bowser.safari || bowser.ios) {
         var menuHeader: HTMLElement = document.getElementById("menuHeader");
         menuHeader.parentNode.removeChild(menuHeader);
     } else {
